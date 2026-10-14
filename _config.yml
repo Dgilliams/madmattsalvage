@@ -1,0 +1,62 @@
+# SITE CONFIGURATION
+title: Mad Matt Salvage
+author: Mad Matt Salvage
+description: R
+baseurl: "" # the subpath of your site, e.g. /blog
+url: "https://www.madmatsalvage.com"
+
+# SEO PLUGIN
+social:
+  name:
+  links:
+
+# THEME SETTINGS
+navigation: # Navigation links
+  - {name: 'R', link: '/#R'}
+
+tagline: >
+    R
+
+# Main background image: use the path from /assets/img/ => This will output /assets/img/posts/sleek_lg.jpg
+# hero_img: posts/
+
+email: damosdesigns@gmail.com # email for form submission
+
+# twitter_username: twitter # replace with your_twitter_username or comment to remove link from footer
+# instagram_username: damos_designs # replace with your_instagram_username or comment to remove link from footer
+
+# google_tag_manager: GTM-XXXXXXX # Uncomment to enable GTM. Replace GTM-XXXXXXX with your GTM container ID
+
+service_worker: true
+
+# BUILD SETTINGS
+markdown: kramdown
+highlighter: rouge # or pygments or null
+# theme: jekyll-sleek # Uncomment if you're using the theme as a ruby gem
+exclude:
+  - README.md
+  - node_modules
+  - script
+  - package.json
+  - package-lock.json
+  - Gemfile
+  - Gemfile.lock
+  - vendor
+  - npm-debug.log
+  - gulpfile.js
+
+include: ['_pages']
+permalink: /:title/
+include: ['_success']
+permalink: /:title/
+
+sass:
+  sass_dir: _sass
+
+compress_html:
+  clippings: all
+
+plugins:
+  - jekyll-sitemap
+  - jekyll-seo-tag
+  - jekyll-admin

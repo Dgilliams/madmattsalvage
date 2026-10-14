@@ -1,0 +1,92 @@
+---
+layout: compress
+---
+<!DOCTYPE html>
+<html lang="{{ page.lang | default: site.lang | default: "en-US" }}">
+
+  {% include head.html %}
+
+  <link rel="preload" href="{{ '/assets/css/shop.css' | relative_url }}" as="style" onload="this.rel='stylesheet'">
+
+  <body class="site">
+
+    {% if site.google_tag_manager %}
+
+      <!-- Google Tag Manager (noscript) -->
+      <noscript><iframe src="https://www.googletagmanager.com/ns.html?id={{ site.google_tag_manager }}"
+      height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+      <!-- End Google Tag Manager (noscript) -->
+
+
+    {% endif %}
+
+    <!-- {% include header.html %} -->
+
+    <main class="site__content">
+      <center>
+        <div class="d-none d-md-block d-lg-block d-xl-block" style="max-width:420px; margin:120px;">
+          <img style="border-radius:15%;  display: block;
+            margin-left: auto;
+            margin-right: auto;" src="/assets/img/posts/MidFlRentalsLogo_1.png">
+          </div>
+
+          <div class="d-xs-block d-sm-block d-md-none d-lg-none d-xl-none" style="max-width:420px; margin:40px;">
+            <img style="border-radius:15%;  display: block;
+              margin-left: auto;
+              margin-right: auto;" src="/assets/img/posts/MidFlRentalsLogo_1.png">
+            </div>
+
+        <div class="hero lazyload" data-bg="{{ site.url }}{{ site.baseurl }}/assets/img/posts/damien_gilliams_indian_river.jpg"  style="margin-top:50px">
+          <div class="hero__wrap">
+            <!-- <p style="margin-top:30px" class="hero__meta">{{ site.tagline }}</p> -->
+            <h1 class="h2">Personalized Property Acquisitions and Sales</h1>
+            <h1 class="h4">Servicing Mid-Florida for 30 Years</h1>
+          </div>
+        </div>
+
+        <div style="margin:40px;">
+          <h2 class="expertise" style="margin:10px;">Why Stress About Your Properties?</h2>
+          <!-- <p style="margin:10px;">Maintenance, Finding Qualified Tenants, Applications, Leases... Who wants to deal with all of that?!</p>
+          <p style="margin:10px;"><strong>You should be on vacation!</strong></p> -->
+          <p style="margin:10px;">Leave the stress up to the professionals and enjoy the profits from your Mid-Florida property!</p>
+        </div>
+    </center>
+
+      <div style="margin:10px;">
+        <img src="/assets/img/posts/dad_in_frame.png" align="center" style="display: block; margin: auto;"/>
+      </div>
+
+      <center>
+
+        <div style="margin:40px;">
+          <h2 class="expertise" style="margin:10px;">Expertise</h2>
+          <p style="margin:10px;">Damien Gilliams, has over <strong>30 years of experience</strong> and has lived in Sebastian, Florida for almost <strong>40 years.</strong></p>
+        </div>
+
+        <hr>
+
+        <div style="margin:40px;">
+          <h2 class="expertise" style="margin:10px;">Areas of Service</h2>
+          <p style="margin:10px;">Indian River County: Vero Beach, Sebastian, Fellsmere</p>
+          <p style="margin:10px;">Southern Brevard County: Melbourne, Palm Bay, Grant, Micco and Barefoot Bay</p>
+        </div>
+
+        <hr>
+
+        <h2 style="margin:20px;"> Contact Today!</h2>
+
+        <div class="row">
+          <div class="col" style="margin:20px;">
+            <a class="d-none d-md-block d-lg-block d-xl-block btn btn-lg" style="padding:25px 30px; max-width:420px" href="" target="_blank" role="button">Call Damien (772) 713-5071 </a>
+            <a class="d-xs-block d-sm-block d-md-none d-lg-none d-xl-none btn btn-lg" href="tel:772" style="margin:0px; max-width:420px" target="_blank" role="button">Call Damien (772) 713-5071 </a>
+          </div>
+        </div>
+
+        <a class="btn btn-lg" style="margin:20px;" href="mailto:midflrentals@gmail.com?subject=Property Management" target="_blank" role="button">Email MidFLRentals@Gmail.com</a>
+      </center>
+    </main>
+
+    {% include footer.html %}
+  </body>
+
+</html>

@@ -1,0 +1,22 @@
+<footer class="footer">
+  <div class="container">
+    <div style="padding-top:10px;">
+      <a href="https://www.damosdesigns.com">Made with <span style="color: #e25555;">&#9829;</span> & ☕ by Damien L. Gilliams </a>
+    </div>
+    <span>&copy; {{ site.time | date: '%Y' }} {{ site.title | escape }}. All rights reserved.</span>
+  </div>
+</footer>
+<script async src="{{ "/assets/js/bundle.js" | relative_url }}"></script>
+{% if site.service_worker %}
+<script async>
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('{{ "/sw.js" | relative_url }}').then(function( registration ) {
+      console.log('ServiceWorker registration successful with scope: ', registration.scope);
+    })
+    .catch(function(error) {
+      console.log('ServiceWorker registration failed: ', error);
+    });
+  }
+</script>
+
+{% endif %}

@@ -1,0 +1,54 @@
+<div class="formWrapper" style="width: 100%; margin: 0 auto;">
+	<form id="funForm" action="https://formspree.io/damosdesigns@gmail.com" method="POST">
+		<div style="display:none">
+			<input name="_gotcha" class="form-control" type="hidden">
+			<input name="_next" type="hidden" value="http://www.damosdesigns.com/_success/success_donation/">
+		</div>
+		<div>
+			<label>Name</label>
+			<input name="name" autocomplete="name" type="text" class="form-control">
+		</div>
+		<div>
+			<label>Email</label>
+			<input name="_replyto" autocomplete="email" type="email" class="form-control">
+		</div>
+		<div>
+			<label>Message</label>
+			<textarea name="message" class="form-control" spellcheck="true" form="funForm" style="resize: none; min-height: 200px;"></textarea>
+		</div>
+		<div>
+			<input type="submit" value="Send">
+		</div>
+	</form>
+</div>
+<script type="text/javascript">
+	function toArray(arrayLike){
+		var length = arrayLike.length;
+		var array = [];
+
+		if(length === null || length === undefined || length === 0){
+			return;
+		}
+
+		for(var i = 0; i < length; ++i){
+			array[i] = arrayLike[i];
+		}
+		return array;
+
+	}
+
+	function resizeTextArea(textarea){
+		console.log(textarea);
+		textarea.style.height = "auto";
+		var scrollHeight = textarea.scrollHeight;
+		var hasScrollbar = scrollHeight !== 200;
+		textarea.style.height = textarea.scrollHeight + hasScrollbar*12 + "px";
+		console.log(textarea.style.scrollHeight);
+	}
+
+	toArray(document.getElementsByTagName("textarea")).forEach(function(textarea){
+		textarea.oninput = function(){
+			resizeTextArea(textarea);
+		};
+	});
+</script>

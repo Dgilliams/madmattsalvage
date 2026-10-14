@@ -1,0 +1,73 @@
+---
+layout: compress
+---
+<!DOCTYPE html>
+<html lang="{{ page.lang | default: site.lang | default: "en-US" }}">
+
+  {% include head.html %}
+
+  <body class="site">
+
+    {% if site.google_tag_manager %}
+
+      <!-- Google Tag Manager (noscript) -->
+      <noscript><iframe src="https://www.googletagmanager.com/ns.html?id={{ site.google_tag_manager }}"
+      height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+      <!-- End Google Tag Manager (noscript) -->
+
+    {% endif %}
+
+    {% include header.html %}
+
+    <script>
+      function download(file){
+          if(file){
+            window.location=file;
+          }
+      }
+
+      function downloadSpecifiedFile(){
+          download("{{page.downloadUrl}}");
+      }
+    </script>
+
+    <div class="hero--small">
+      <div class="hero__wrap">
+        <h1 class="hero__title">Thank you for your support!</h1>
+      </div>
+    </div>
+
+    <main class="site__content">
+      <section class="blog">
+        <div class="container">
+          {% if page.downloadUrl %}
+            <h4 style="margin-top:20px; text-align:center">Press the button below if your download doesn't start immediately. </h4>
+            <h5 style="text-align:center">On mobile you can press and hold, then select download. </h5>
+            <div style="text-align:center">
+              <a href="{{page.downloadUrl}}" download>Click and save {{page.downloadFileTitle}}</a>
+            </div>
+          {% endif %}
+          {{content}}
+          <br>
+          <h2 style="text-align:center"> Browse More Downloads </h2>
+          <div class="post-list" itemscope="" itemtype="http://schema.org/Blog">
+            {% for post in site.posts %}
+              {% if post.forsale %}
+                {% include card.html %}
+              {% endif %}
+            {% endfor %}
+
+            <!-- {% include pagination.html %} -->
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <script>
+      downloadSpecifiedFile();
+    </script>
+
+    {% include footer.html %}
+  </body>
+
+</html>

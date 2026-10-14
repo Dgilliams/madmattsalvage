@@ -1,0 +1,31 @@
+<template id="shop_item_template">
+  <div class="post-card" itemprop="blogPosts" itemscope="" itemtype="http://schema.org/BlogPosting">
+    {% if post.categories %}
+      {% assign categories = post.categories %}
+      <span class="post-card__label">
+        {% for category in categories %}
+          <a href="{{site.baseurl}}/categories/#{{category|slugize}}" class="label"> {{ category }} </a>
+          {% unless forloop.last %}&nbsp;{% endunless %}
+        {% endfor %}
+      </span>
+    {% endif %}
+    <a href="{{ post.url | relative_url }}">
+      <img class="shop_item_image" alt="{{ post.title }}">
+    </a>
+    <a class="post-card__inner" href="{{ post.url | relative_url }}">
+      <div class="post-card__header">
+        <h2 class="shop_item_title"></h2>
+        {% assign date_format = site.sleek.date_format | default: "%b %-d, %Y" %}
+        <span class="post-card__meta">
+          <time>{{ post.date | date: date_format }}</time>
+        </span>
+      </div>
+      {% if post.summary %}
+        <p>{{ post.summary | strip_html | truncatewords:20 }}</p>
+      {% else %}
+        <p>{{ post.content | strip_html | truncatewords: 20 }}</p>
+      {% endif %}
+      <h3 class="shop_item_description"></h3>
+    </a>
+  </div>
+</template>

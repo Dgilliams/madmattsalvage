@@ -1,0 +1,42 @@
+---
+layout: compress
+---
+<!DOCTYPE html>
+<html lang="{{ page.lang | default: site.lang | default: "en-US" }}">
+
+  {% include head.html %}
+
+  <link rel="preload" href="{{ '/assets/css/shop.css' | relative_url }}" as="style" onload="this.rel='stylesheet'">
+
+  <body class="site">
+
+    {% if site.google_tag_manager %}
+
+      <!-- Google Tag Manager (noscript) -->
+      <noscript><iframe src="https://www.googletagmanager.com/ns.html?id={{ site.google_tag_manager }}"
+      height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+      <!-- End Google Tag Manager (noscript) -->
+
+
+    {% endif %}
+
+    <!-- {% include header.html %} -->
+
+    <main class="site__content">
+      <div style="width:100%">
+        <center>
+          <div class="pirate-screen">
+            <div class="pirate-r">R</div>
+         </div>
+          
+        </center>
+      </div>
+
+ 
+    </main>
+
+    {% include send_it.js %}
+    {% include footer.html %}
+  </body>
+
+</html>
