@@ -1,42 +1,371 @@
 ---
 layout: compress
 ---
+
 <!DOCTYPE html>
 <html lang="{{ page.lang | default: site.lang | default: "en-US" }}">
 
   {% include head.html %}
-
-  <link rel="preload" href="{{ '/assets/css/shop.css' | relative_url }}" as="style" onload="this.rel='stylesheet'">
 
   <body class="site">
 
     {% if site.google_tag_manager %}
 
       <!-- Google Tag Manager (noscript) -->
-      <noscript><iframe src="https://www.googletagmanager.com/ns.html?id={{ site.google_tag_manager }}"
-      height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+      <noscript>
+        <iframe
+          src="https://www.googletagmanager.com/ns.html?id={{ site.google_tag_manager }}"
+          height="0"
+          width="0"
+          style="display:none;visibility:hidden">
+        </iframe>
+      </noscript>
       <!-- End Google Tag Manager (noscript) -->
-
 
     {% endif %}
 
     <!-- {% include header.html %} -->
 
     <main class="site__content">
+
       <div style="width:100%">
+
         <center>
+
+          <!-- ============================================
+               EXISTING PIRATE R SPLASH
+               ============================================ -->
+
           <div class="pirate-screen">
-            <div class="pirate-r">R</div>
-         </div>
-          
+
+            <div class="pirate-r">
+              R
+            </div>
+
+          </div>
+
+
+          <!-- ============================================
+               UNDERWATER SECTION
+               ============================================ -->
+
+          <div class="mad-matt-water-stage">
+
+            <!-- animated water background -->
+            <canvas
+              id="mad-matt-water"
+              aria-hidden="true">
+            </canvas>
+
+
+            <!-- surface transition -->
+            <div
+              class="mad-matt-waterline"
+              aria-hidden="true">
+
+              <div class="waterline-wave waterline-wave-one"></div>
+              <div class="waterline-wave waterline-wave-two"></div>
+
+            </div>
+
+
+            <div class="mad-matt-old-site">
+
+
+              <!-- INTRO -->
+
+              <div class="mad-matt-intro">
+
+                <p class="mad-matt-eyebrow">
+                  Marathon · Florida Keys · Since 1998
+                </p>
+
+                <h1>
+                  MAD MATT SALVAGE
+                </h1>
+
+                <h2>
+                  Marine Salvage &amp; Towing
+                </h2>
+
+
+                <div class="mad-matt-divider">
+
+                  <span></span>
+
+                  <b>◆</b>
+
+                  <span></span>
+
+                </div>
+
+
+                <p class="mad-matt-lead">
+                  Mad Matt Salvage has been in business since 1998
+                  in Marathon, the surrounding Keys, and other parts of Florida.
+                </p>
+
+                <p>
+                  Many a boat has been raised, bought, and sold since Mad Matt
+                  started his business. Ask anyone in Boot Key Harbor!
+                </p>
+
+              </div>
+
+
+
+              <!-- HERO IMAGE -->
+
+              <div class="mad-matt-hero-image">
+
+                <img
+                  src="{{ '/assets/img/posts/mad-matt/matts_boat_yard_049.jpg' | relative_url }}"
+                  alt="Mad Matt Salvage"
+                  loading="lazy"
+                >
+
+              </div>
+
+
+
+              <!-- SERVICES -->
+
+              <div class="mad-matt-services">
+
+                <div class="mad-matt-section-title">
+
+                  <span></span>
+
+                  <h3>
+                    Services
+                  </h3>
+
+                  <span></span>
+
+                </div>
+
+
+                <div class="mad-matt-service-grid">
+
+
+                  <div class="mad-matt-service">
+
+                    <div class="mad-matt-service-icon">
+                      ⚓
+                    </div>
+
+                    <strong>
+                      Salvage
+                    </strong>
+
+                    <small>
+                      Raise sunken vessels
+                    </small>
+
+                  </div>
+
+
+                  <div class="mad-matt-service">
+
+                    <div class="mad-matt-service-icon">
+                      ◉
+                    </div>
+
+                    <strong>
+                      Tow
+                    </strong>
+
+                    <small>
+                      Disabled boats
+                    </small>
+
+                  </div>
+
+
+                  <div class="mad-matt-service">
+
+                    <div class="mad-matt-service-icon">
+                      ⚙
+                    </div>
+
+                    <strong>
+                      Diesel Work
+                    </strong>
+
+                  </div>
+
+
+                  <div class="mad-matt-service">
+
+                    <div class="mad-matt-service-icon">
+                      ◇
+                    </div>
+
+                    <strong>
+                      Fiberglass Work
+                    </strong>
+
+                  </div>
+
+
+                  <div class="mad-matt-service">
+
+                    <div class="mad-matt-service-icon">
+                      ✦
+                    </div>
+
+                    <strong>
+                      Woodwork
+                    </strong>
+
+                  </div>
+
+
+                  <div class="mad-matt-service">
+
+                    <div class="mad-matt-service-icon">
+                      ⛓
+                    </div>
+
+                    <strong>
+                      Welding &amp; Fabrication
+                    </strong>
+
+                  </div>
+
+
+                  <div class="mad-matt-service">
+
+                    <div class="mad-matt-service-icon">
+                      ◈
+                    </div>
+
+                    <strong>
+                      Consulting
+                    </strong>
+
+                  </div>
+
+
+                  <div class="mad-matt-service">
+
+                    <div class="mad-matt-service-icon">
+                      ⚓
+                    </div>
+
+                    <strong>
+                      Shipwright Services
+                    </strong>
+
+                  </div>
+
+
+                </div>
+
+              </div>
+
+
+
+              <!-- VIDEOS -->
+
+              <div class="mad-matt-videos">
+
+                <div class="mad-matt-section-title">
+
+                  <span></span>
+
+                  <h3>
+                    Mad Matt Salvage in Action
+                  </h3>
+
+                  <span></span>
+
+                </div>
+
+
+                <div class="mad-matt-video-grid">
+
+
+                  <div class="mad-matt-video">
+
+                    <iframe
+                      src="https://www.youtube.com/embed/4Eq4TDoukbg?si=z75Vj2shQPiZPCHy"
+                      title="Mad Matt Salvage Video"
+                      frameborder="0"
+                      loading="lazy"
+                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                      referrerpolicy="strict-origin-when-cross-origin"
+                      allowfullscreen>
+                    </iframe>
+
+                  </div>
+
+
+                  <div class="mad-matt-video">
+
+                    <iframe
+                      src="https://www.youtube.com/embed/CqdRgWRqPSA?si=FAJBxmx-zBzLXGFS"
+                      title="Mad Matt Salvage Video"
+                      frameborder="0"
+                      loading="lazy"
+                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                      referrerpolicy="strict-origin-when-cross-origin"
+                      allowfullscreen>
+                    </iframe>
+
+                  </div>
+
+
+                </div>
+
+              </div>
+
+
+
+              <!-- CONTACT -->
+
+              <div class="mad-matt-contact">
+
+                <div class="mad-matt-contact-icon">
+                  ⚓
+                </div>
+
+                <p class="mad-matt-contact-label">
+                  Need Salvage or Towing?
+                </p>
+
+                <a href="tel:+13057667209">
+                  (305) 766-7209
+                </a>
+
+                <p class="mad-matt-contact-name">
+                  MAD MATT SALVAGE
+                </p>
+
+                <p class="mad-matt-contact-location">
+                  Marathon - Florida Keys - Remote Florida Locations
+                </p>
+
+              </div>
+
+
+            </div>
+
+          </div>
+
         </center>
+
       </div>
 
- 
     </main>
 
+
     {% include send_it.js %}
+
+    <script src="{{ '/assets/js/mad-matt.js' | relative_url }}"></script>
+
     {% include footer.html %}
+
   </body>
 
 </html>
