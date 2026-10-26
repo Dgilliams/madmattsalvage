@@ -1,6 +1,6 @@
 /* =========================================================
    MAD MATT SALVAGE
-   MAIN STYLESHEET
+   RESPONSIVE MAIN STYLESHEET
    ========================================================= */
 
 :root {
@@ -17,7 +17,9 @@
   --text-muted: #8198a0;
 
   --line-gold: rgba(200, 164, 93, 0.32);
+
   --content-width: 1120px;
+  --page-gutter: clamp(14px, 3.5vw, 40px);
 
   --sky-bg-top: #040c12;
   --sky-bg-bottom: #163847;
@@ -36,6 +38,11 @@
   --stage-bottom: #020c12;
 }
 
+
+/* =========================================================
+   BASE
+   ========================================================= */
+
 html {
   box-sizing: border-box;
   line-height: 1.15;
@@ -53,10 +60,13 @@ html,
 body {
   margin: 0;
   padding: 0;
+  width: 100%;
 }
 
 body {
   min-width: 320px;
+  overflow-x: hidden;
+
   background: var(--navy-950);
   color: var(--text);
 
@@ -74,8 +84,6 @@ body {
 
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-
-  overflow-x: hidden;
 }
 
 main,
@@ -84,13 +92,29 @@ article,
 header,
 footer,
 nav,
-aside {
+aside,
+figure {
   display: block;
+}
+
+figure,
+h1,
+h2,
+h3,
+h4,
+p {
+  margin-top: 0;
+}
+
+img,
+svg,
+canvas,
+iframe {
+  max-width: 100%;
 }
 
 img {
   display: block;
-  max-width: 100%;
   height: auto;
   border: 0;
 }
@@ -121,7 +145,10 @@ textarea {
 
 .site {
   display: flex;
+
   min-height: 100vh;
+  min-height: 100dvh;
+
   flex-direction: column;
 }
 
@@ -130,20 +157,15 @@ textarea {
   width: 100%;
 }
 
-.site__content > div {
-  width: 100%;
-}
-
-.site__content center {
-  display: block;
-  width: 100%;
-  text-align: inherit;
-}
-
 .container {
-  width: min(var(--content-width), calc(100% - 40px));
-  margin: 0 auto;
+  width: min(
+    var(--content-width),
+    calc(100% - 32px)
+  );
+
+  margin-inline: auto;
 }
+
 
 /* =========================================================
    ABOVE-WATER SPLASH
@@ -160,13 +182,21 @@ textarea {
 
   width: 100%;
   height: 100svh;
-  min-height: 600px;
+
+  min-height: 560px;
 
   display: flex;
+
   align-items: center;
   justify-content: center;
 
   overflow: hidden;
+
+  padding-left:
+    env(safe-area-inset-left, 0px);
+
+  padding-right:
+    env(safe-area-inset-right, 0px);
 
   background:
     linear-gradient(
@@ -178,13 +208,17 @@ textarea {
 
 .pirate-sky-canvas {
   position: absolute;
+
   z-index: 0;
+
   inset: 0;
 
   display: block;
 
   width: 100%;
   height: 100%;
+
+  max-width: none;
 
   pointer-events: none;
 }
@@ -193,7 +227,9 @@ textarea {
   content: "";
 
   position: absolute;
+
   z-index: 1;
+
   inset: 0;
 
   pointer-events: none;
@@ -223,19 +259,28 @@ textarea {
   content: "";
 
   position: absolute;
+
   z-index: 2;
 
   left: 0;
   right: 0;
   top: 70%;
 
-  height: 190px;
+  height: clamp(
+    120px,
+    20vh,
+    190px
+  );
 
   transform: translateY(-50%);
 
   pointer-events: none;
 
-  opacity: calc(0.2 + var(--sun-strength) * 0.45);
+  opacity:
+    calc(
+      0.2 +
+      var(--sun-strength) * 0.45
+    );
 
   background:
     radial-gradient(
@@ -250,18 +295,21 @@ textarea {
     );
 }
 
+
 /* =========================================================
    COMPASS
    ========================================================= */
 
 .pirate-compass {
   position: absolute;
+
   z-index: 2;
 
   left: 50%;
   top: 46%;
 
   width: min(76vmin, 680px);
+
   aspect-ratio: 1;
 
   transform:
@@ -269,7 +317,12 @@ textarea {
       calc(-50% + var(--pointer-x) * -7px),
       calc(-50% + var(--pointer-y) * -5px)
     )
-    rotate(calc(var(--splash-scroll) * 12deg));
+    rotate(
+      calc(
+        var(--splash-scroll) *
+        12deg
+      )
+    );
 
   border-radius: 50%;
 
@@ -277,7 +330,8 @@ textarea {
 
   pointer-events: none;
 
-  transition: opacity 0.4s ease;
+  transition:
+    opacity 0.4s ease;
 }
 
 .pirate-compass::before,
@@ -292,7 +346,9 @@ textarea {
 .pirate-compass::before {
   inset: 0;
 
-  border: 1px solid rgba(211, 177, 104, 0.58);
+  border:
+    1px solid
+    rgba(211, 177, 104, 0.58);
 
   background:
     repeating-conic-gradient(
@@ -325,7 +381,9 @@ textarea {
 .pirate-compass::after {
   inset: 18%;
 
-  border: 1px solid rgba(211, 177, 104, 0.2);
+  border:
+    1px solid
+    rgba(211, 177, 104, 0.2);
 
   background:
     linear-gradient(
@@ -341,11 +399,14 @@ textarea {
       transparent 50.15%
     );
 
-  animation: compassBreathe 7s ease-in-out infinite;
+  animation:
+    compassBreathe
+    7s
+    ease-in-out
+    infinite;
 }
 
 @keyframes compassBreathe {
-
   0%,
   100% {
     opacity: 0.48;
@@ -354,8 +415,8 @@ textarea {
   50% {
     opacity: 0.9;
   }
-
 }
+
 
 /* =========================================================
    PIRATE R
@@ -363,6 +424,7 @@ textarea {
 
 .pirate-r {
   position: relative;
+
   z-index: 5;
 
   font-family:
@@ -370,7 +432,12 @@ textarea {
     Georgia,
     serif;
 
-  font-size: min(96vw, 90vh);
+  font-size:
+    min(
+      96vw,
+      90vh
+    );
+
   line-height: 0.7;
 
   color: transparent;
@@ -392,34 +459,67 @@ textarea {
   filter:
     drop-shadow(0 4px 0 #76501f)
     drop-shadow(0 10px 0 #38240f)
-    drop-shadow(0 20px 28px rgba(0, 0, 0, 0.78))
-    drop-shadow(10px -6px 30px rgba(229, 185, 96, 0.1));
+    drop-shadow(
+      0 20px 28px
+      rgba(0, 0, 0, 0.78)
+    )
+    drop-shadow(
+      10px -6px 30px
+      rgba(229, 185, 96, 0.1)
+    );
 
   transform:
     translate(
-      calc(var(--pointer-x) * 4px),
-      calc(var(--pointer-y) * 3px - var(--splash-scroll) * 30px)
+      calc(
+        var(--pointer-x) *
+        4px
+      ),
+      calc(
+        var(--pointer-y) *
+        3px -
+        var(--splash-scroll) *
+        30px
+      )
     )
     rotate(
-      calc(var(--pointer-x) * 0.3deg + var(--splash-scroll) * -1deg)
+      calc(
+        var(--pointer-x) *
+        0.3deg +
+        var(--splash-scroll) *
+        -1deg
+      )
     );
 
-  opacity: calc(1 - var(--splash-scroll) * 0.28);
+  opacity:
+    calc(
+      1 -
+      var(--splash-scroll) *
+      0.28
+    );
 
-  will-change: transform, opacity;
+  will-change:
+    transform,
+    opacity;
 }
 
 .pirate-r::after {
   content: "";
 
   position: absolute;
+
   z-index: -1;
 
   inset: 18% -5%;
 
-  opacity: calc(0.1 + var(--sun-strength) * 0.18);
+  opacity:
+    calc(
+      0.1 +
+      var(--sun-strength) *
+      0.18
+    );
 
-  filter: blur(42px);
+  filter:
+    blur(42px);
 
   background:
     radial-gradient(
@@ -428,6 +528,7 @@ textarea {
       transparent 68%
     );
 }
+
 
 /* =========================================================
    UNDERWATER STAGE
@@ -440,7 +541,7 @@ textarea {
 
   width: 100%;
 
-  overflow: clip;
+  overflow: visible;
 
   color: var(--text);
 
@@ -467,6 +568,7 @@ textarea {
   content: "";
 
   position: absolute;
+
   z-index: 1;
 
   inset: 0;
@@ -492,6 +594,7 @@ textarea {
   content: "";
 
   position: absolute;
+
   z-index: 1;
 
   inset: 0;
@@ -510,12 +613,14 @@ textarea {
     );
 }
 
+
 /* =========================================================
-   SPLIT-WATER SEPARATOR
+   WATER SURFACE
    ========================================================= */
 
 .mad-matt-sea-surface {
   position: absolute;
+
   z-index: 6;
 
   left: 0;
@@ -524,15 +629,22 @@ textarea {
   width: 100%;
   height: 110px;
 
-  transform: translateY(-42px);
+  transform:
+    translateY(-42px);
 
   pointer-events: none;
 
   overflow: hidden;
 
   filter:
-    drop-shadow(0 -6px 10px rgba(151, 223, 229, 0.08))
-    drop-shadow(0 10px 18px rgba(0, 0, 0, 0.18));
+    drop-shadow(
+      0 -6px 10px
+      rgba(151, 223, 229, 0.08)
+    )
+    drop-shadow(
+      0 10px 18px
+      rgba(0, 0, 0, 0.18)
+    );
 }
 
 .mad-matt-sea-surface::before {
@@ -575,8 +687,10 @@ textarea {
     );
 
   box-shadow:
-    0 0 14px rgba(194, 241, 244, 0.7),
-    0 6px 20px rgba(83, 172, 189, 0.26);
+    0 0 14px
+    rgba(194, 241, 244, 0.7),
+    0 6px 20px
+    rgba(83, 172, 189, 0.26);
 }
 
 .mad-matt-surface-wave,
@@ -586,7 +700,11 @@ textarea {
 
   left: -220px;
 
-  width: calc(100% + 440px);
+  width:
+    calc(
+      100% +
+      440px
+    );
 
   pointer-events: none;
 }
@@ -607,9 +725,14 @@ textarea {
       transparent 67%
     );
 
-  background-size: 150px 42px;
+  background-size:
+    150px 42px;
 
-  animation: surfaceSweep 8s linear infinite;
+  animation:
+    surfaceSweep
+    8s
+    linear
+    infinite;
 }
 
 .mad-matt-surface-wave-two {
@@ -627,9 +750,14 @@ textarea {
       transparent 70%
     );
 
-  background-size: 210px 40px;
+  background-size:
+    210px 40px;
 
-  animation: surfaceSweepReverse 12.5s linear infinite;
+  animation:
+    surfaceSweepReverse
+    12.5s
+    linear
+    infinite;
 }
 
 .mad-matt-surface-foam {
@@ -642,51 +770,62 @@ textarea {
   background:
     radial-gradient(
       circle at 10px 8px,
-      rgba(244, 251, 251, 0.7) 0 2px,
+      rgba(244, 251, 251, 0.7)
+      0 2px,
       transparent 2.2px
     ),
     radial-gradient(
       circle at 26px 7px,
-      rgba(244, 251, 251, 0.55) 0 2px,
+      rgba(244, 251, 251, 0.55)
+      0 2px,
       transparent 2.2px
     ),
     radial-gradient(
       circle at 42px 9px,
-      rgba(244, 251, 251, 0.5) 0 1.8px,
+      rgba(244, 251, 251, 0.5)
+      0 1.8px,
       transparent 2px
     );
 
-  background-size: 54px 16px;
+  background-size:
+    54px 16px;
 
-  animation: foamDrift 10s linear infinite;
+  animation:
+    foamDrift
+    10s
+    linear
+    infinite;
 }
 
 @keyframes surfaceSweep {
-
   to {
-    transform: translateX(150px);
+    transform:
+      translateX(150px);
   }
-
 }
 
 @keyframes surfaceSweepReverse {
-
   to {
-    transform: translateX(-160px);
+    transform:
+      translateX(-160px);
   }
-
 }
 
 @keyframes foamDrift {
-
   to {
-    transform: translateX(54px);
+    transform:
+      translateX(54px);
   }
-
 }
+
+
+/* =========================================================
+   UNDERWATER CANVAS
+   ========================================================= */
 
 #mad-matt-water {
   position: absolute;
+
   z-index: 2;
 
   top: 0;
@@ -695,72 +834,97 @@ textarea {
   display: block;
 
   width: 100%;
+
   height: 100vh;
+  height: 100dvh;
+
+  max-width: none;
 
   pointer-events: none;
 
-  will-change: transform;
+  will-change:
+    transform;
 }
+
 
 /* =========================================================
-   MAIN CONTENT
+   WATERLINE BRAND
    ========================================================= */
 
-.mad-matt-old-site {
-  position: relative;
-  z-index: 10;
+.mad-matt-waterline-brand {
+  position: absolute;
 
-  width: min(var(--content-width), calc(100% - 40px));
+  z-index: 20;
 
-  margin: 0 auto;
+  top: 0;
+  left: 0;
 
-  padding: 128px 0 110px;
+  width: 100%;
 
-  text-align: left;
-}
+  padding-inline:
+    max(
+      var(--page-gutter),
+      env(
+        safe-area-inset-left,
+        0px
+      )
+    )
+    max(
+      var(--page-gutter),
+      env(
+        safe-area-inset-right,
+        0px
+      )
+    );
 
-.mad-matt-reveal {
-  opacity: 0;
-
-  transform: translateY(25px);
-
-  transition:
-    opacity 0.8s ease,
-    transform 0.8s cubic-bezier(0.2, 0.65, 0.25, 1);
-}
-
-.mad-matt-reveal.is-visible {
-  opacity: 1;
-
-  transform: translateY(0);
-}
-
-/* =========================================================
-   INTRO
-   ========================================================= */
-
-.mad-matt-intro {
-  max-width: 820px;
-
-  margin: 0 auto 78px;
+  transform:
+    translateY(-50%);
 
   text-align: center;
+
+  pointer-events: none;
 }
 
-.mad-matt-eyebrow {
-  margin: 0 0 18px;
+.mad-matt-brand-eyebrow {
+  margin:
+    0
+    0
+    clamp(
+      6px,
+      1vw,
+      10px
+    );
 
   color: var(--gold);
 
-  font-size: 11px;
+  font-size:
+    clamp(
+      8px,
+      1.9vw,
+      11px
+    );
+
   font-weight: 700;
 
-  letter-spacing: 0.29em;
+  line-height: 1.25;
+
+  letter-spacing:
+    clamp(
+      0.12em,
+      0.35vw,
+      0.25em
+    );
 
   text-transform: uppercase;
+
+  white-space: nowrap;
+
+  text-shadow:
+    0 3px 12px
+    rgba(0, 0, 0, 0.7);
 }
 
-.mad-matt-intro h1 {
+.mad-matt-waterline-brand h1 {
   margin: 0;
 
   color: var(--gold-light);
@@ -770,38 +934,174 @@ textarea {
     "Times New Roman",
     serif;
 
-  font-size: clamp(43px, 7vw, 78px);
+  font-size:
+    clamp(
+      1.65rem,
+      8vw,
+      5rem
+    );
 
   font-weight: 700;
 
-  line-height: 0.96;
+  line-height: 0.95;
 
-  letter-spacing: 0.005em;
+  letter-spacing: -0.02em;
+
+  white-space: nowrap;
 
   text-shadow:
-    0 5px 28px rgba(0, 0, 0, 0.36);
+    0 3px 0
+    rgba(70, 45, 15, 0.58),
+    0 8px 22px
+    rgba(0, 0, 0, 0.78),
+    0 0 30px
+    rgba(224, 193, 122, 0.16);
 }
 
-.mad-matt-intro h2 {
-  margin: 18px 0 0;
+.mad-matt-brand-subtitle {
+  margin:
+    clamp(
+      8px,
+      1.2vw,
+      15px
+    )
+    0
+    0;
 
-  color: #b3c5ca;
+  color: #c0d0d4;
 
-  font-size: clamp(14px, 2vw, 21px);
+  font-size:
+    clamp(
+      10px,
+      2.3vw,
+      19px
+    );
 
-  font-weight: 500;
+  font-weight: 600;
 
-  letter-spacing: 0.21em;
+  line-height: 1.25;
+
+  letter-spacing:
+    clamp(
+      0.1em,
+      0.35vw,
+      0.2em
+    );
 
   text-transform: uppercase;
+
+  text-shadow:
+    0 4px 14px
+    rgba(0, 0, 0, 0.72);
+}
+
+
+/* =========================================================
+   MAIN CONTENT
+   ========================================================= */
+
+.mad-matt-old-site {
+  position: relative;
+
+  z-index: 10;
+
+  width:
+    min(
+      var(--content-width),
+      calc(
+        100% -
+        32px
+      )
+    );
+
+  margin-inline: auto;
+
+  padding:
+    clamp(
+      115px,
+      15vw,
+      185px
+    )
+    0
+    clamp(
+      72px,
+      9vw,
+      110px
+    );
+
+  text-align: left;
+}
+
+
+/* =========================================================
+   REVEALS
+   ========================================================= */
+
+.mad-matt-reveal {
+  opacity: 0;
+
+  transform:
+    translateY(24px);
+
+  transition:
+    opacity
+    0.72s
+    ease,
+    transform
+    0.72s
+    cubic-bezier(
+      0.2,
+      0.65,
+      0.25,
+      1
+    );
+}
+
+.mad-matt-reveal.is-visible {
+  opacity: 1;
+
+  transform:
+    translateY(0);
+}
+
+
+/* =========================================================
+   INTRO COPY
+   ========================================================= */
+
+.mad-matt-intro-copy {
+  max-width: 760px;
+
+  margin:
+    0
+    auto
+    clamp(
+      50px,
+      7vw,
+      78px
+    );
+
+  text-align: center;
 }
 
 .mad-matt-divider {
-  width: min(360px, 75%);
+  width:
+    min(
+      360px,
+      78%
+    );
 
-  margin: 31px auto;
+  margin:
+    0
+    auto
+    clamp(
+      24px,
+      4vw,
+      31px
+    );
 
   display: flex;
+
   align-items: center;
 
   gap: 15px;
@@ -823,34 +1123,49 @@ textarea {
 }
 
 .mad-matt-divider span:last-child {
-  transform: scaleX(-1);
+  transform:
+    scaleX(-1);
 }
 
 .mad-matt-divider b {
   font-size: 7px;
 }
 
-.mad-matt-intro p {
+.mad-matt-intro-copy p {
   max-width: 700px;
 
-  margin: 15px auto 0;
+  margin:
+    14px
+    auto
+    0;
 
   color: var(--text-soft);
 
-  font-size: 17px;
+  font-size:
+    clamp(
+      15px,
+      1.7vw,
+      17px
+    );
 
   line-height: 1.72;
 }
 
-.mad-matt-intro .mad-matt-lead {
+.mad-matt-intro-copy .mad-matt-lead {
   color: #e4eaeb;
 
-  font-size: clamp(18px, 2.2vw, 22px);
+  font-size:
+    clamp(
+      17px,
+      2.2vw,
+      22px
+    );
 
   font-weight: 500;
 
-  line-height: 1.65;
+  line-height: 1.62;
 }
+
 
 /* =========================================================
    HERO IMAGE
@@ -861,22 +1176,33 @@ textarea {
 
   width: 100%;
 
-  margin: 0 auto 105px;
+  margin:
+    0
+    auto
+    clamp(
+      72px,
+      9vw,
+      105px
+    );
 
   overflow: hidden;
 
-  border: 1px solid rgba(200, 164, 93, 0.42);
+  border:
+    1px solid
+    rgba(200, 164, 93, 0.42);
 
   background: #020b10;
 
   box-shadow:
-    0 25px 70px rgba(0, 0, 0, 0.35);
+    0 25px 70px
+    rgba(0, 0, 0, 0.35);
 }
 
 .mad-matt-hero-image::before {
   content: "";
 
   position: absolute;
+
   z-index: 2;
 
   inset: 0;
@@ -902,14 +1228,21 @@ textarea {
   content: "";
 
   position: absolute;
+
   z-index: 3;
 
-  inset: 8px;
+  inset:
+    clamp(
+      5px,
+      1vw,
+      8px
+    );
 
   pointer-events: none;
 
   border:
-    1px solid rgba(225, 195, 126, 0.15);
+    1px solid
+    rgba(225, 195, 126, 0.15);
 }
 
 .mad-matt-hero-image img {
@@ -921,15 +1254,22 @@ textarea {
 
   transform:
     scale(1.04)
-    translateY(var(--hero-parallax, 0px));
+    translateY(
+      var(
+        --hero-parallax,
+        0px
+      )
+    );
 
   filter:
     saturate(0.88)
     contrast(1.07)
     brightness(0.94);
 
-  will-change: transform;
+  will-change:
+    transform;
 }
+
 
 /* =========================================================
    SECTION TITLES
@@ -940,13 +1280,25 @@ textarea {
 
   align-items: center;
 
-  gap: 22px;
+  gap:
+    clamp(
+      10px,
+      2.4vw,
+      22px
+    );
 
-  margin-bottom: 38px;
+  margin-bottom:
+    clamp(
+      25px,
+      4vw,
+      38px
+    );
 }
 
 .mad-matt-section-title span {
   flex: 1;
+
+  min-width: 16px;
 
   height: 1px;
 
@@ -959,11 +1311,14 @@ textarea {
 }
 
 .mad-matt-section-title span:last-child {
-  transform: scaleX(-1);
+  transform:
+    scaleX(-1);
 }
 
-.mad-matt-section-title h3 {
+.mad-matt-section-title h2 {
   margin: 0;
+
+  max-width: 72%;
 
   color: var(--gold-light);
 
@@ -972,56 +1327,112 @@ textarea {
     "Times New Roman",
     serif;
 
-  font-size: 13px;
+  font-size:
+    clamp(
+      10px,
+      1.5vw,
+      13px
+    );
 
   font-weight: 600;
 
-  letter-spacing: 0.24em;
+  line-height: 1.35;
+
+  letter-spacing:
+    clamp(
+      0.12em,
+      0.35vw,
+      0.24em
+    );
 
   text-align: center;
 
   text-transform: uppercase;
-
-  white-space: nowrap;
 }
+
 
 /* =========================================================
    SERVICES
    ========================================================= */
 
 .mad-matt-services {
-  margin-bottom: 110px;
+  margin-bottom:
+    clamp(
+      76px,
+      9vw,
+      110px
+    );
 }
 
 .mad-matt-service-grid {
   display: grid;
 
   grid-template-columns:
-    repeat(4, minmax(0, 1fr));
+    repeat(
+      4,
+      minmax(
+        0,
+        1fr
+      )
+    );
 
   overflow: hidden;
 
   border-top:
-    1px solid var(--line-gold);
+    1px solid
+    var(--line-gold);
 
   border-left:
-    1px solid var(--line-gold);
+    1px solid
+    var(--line-gold);
 
   background:
-    rgba(1, 12, 18, 0.2);
+    rgba(
+      1,
+      12,
+      18,
+      0.2
+    );
 
   box-shadow:
-    0 25px 70px rgba(0, 0, 0, 0.12);
+    0 25px 70px
+    rgba(
+      0,
+      0,
+      0,
+      0.12
+    );
 
-  backdrop-filter: blur(4px);
+  backdrop-filter:
+    blur(4px);
+
+  -webkit-backdrop-filter:
+    blur(4px);
 }
 
 .mad-matt-service {
   position: relative;
 
-  min-height: 176px;
+  min-width: 0;
 
-  padding: 29px 20px;
+  min-height:
+    clamp(
+      150px,
+      16vw,
+      176px
+    );
+
+  padding:
+    clamp(
+      20px,
+      3vw,
+      29px
+    )
+    clamp(
+      12px,
+      2vw,
+      20px
+    );
 
   display: flex;
 
@@ -1031,24 +1442,35 @@ textarea {
 
   justify-content: center;
 
-  gap: 12px;
+  gap: 11px;
 
   overflow: hidden;
 
   text-align: center;
 
   border-right:
-    1px solid var(--line-gold);
+    1px solid
+    var(--line-gold);
 
   border-bottom:
-    1px solid var(--line-gold);
+    1px solid
+    var(--line-gold);
 
   background:
-    rgba(3, 18, 25, 0.12);
+    rgba(
+      3,
+      18,
+      25,
+      0.12
+    );
 
   transition:
-    transform 250ms ease,
-    background 250ms ease;
+    transform
+    250ms
+    ease,
+    background
+    250ms
+    ease;
 }
 
 .mad-matt-service::before {
@@ -1065,7 +1487,10 @@ textarea {
   border-radius: 50%;
 
   transform:
-    translate(-50%, -30%);
+    translate(
+      -50%,
+      -30%
+    );
 
   opacity: 0;
 
@@ -1074,29 +1499,51 @@ textarea {
   background:
     radial-gradient(
       circle,
-      rgba(203, 170, 96, 0.1),
+      rgba(
+        203,
+        170,
+        96,
+        0.1
+      ),
       transparent 68%
     );
 
   transition:
-    opacity 250ms ease,
-    transform 350ms ease;
+    opacity
+    250ms
+    ease,
+    transform
+    350ms
+    ease;
 }
 
-.mad-matt-service:hover {
-  z-index: 2;
+@media (hover: hover) and (pointer: fine) {
 
-  transform: translateY(-4px);
+  .mad-matt-service:hover {
+    z-index: 2;
 
-  background:
-    rgba(200, 164, 93, 0.055);
-}
+    transform:
+      translateY(-4px);
 
-.mad-matt-service:hover::before {
-  opacity: 1;
+    background:
+      rgba(
+        200,
+        164,
+        93,
+        0.055
+      );
+  }
 
-  transform:
-    translate(-50%, -55%);
+  .mad-matt-service:hover::before {
+    opacity: 1;
+
+    transform:
+      translate(
+        -50%,
+        -55%
+      );
+  }
+
 }
 
 .mad-matt-service-icon {
@@ -1108,27 +1555,46 @@ textarea {
 
   color: var(--gold);
 
-  font-size: 28px;
-
   line-height: 1;
 
   filter:
     drop-shadow(
-      0 3px 8px rgba(0, 0, 0, 0.28)
+      0 3px 8px
+      rgba(
+        0,
+        0,
+        0,
+        0.28
+      )
     );
 }
 
 .mad-matt-service-icon svg {
   display: block;
 
-  width: 32px;
-  height: 32px;
+  width:
+    clamp(
+      27px,
+      3vw,
+      32px
+    );
+
+  height:
+    clamp(
+      27px,
+      3vw,
+      32px
+    );
 }
 
 .mad-matt-service strong {
   position: relative;
 
   z-index: 1;
+
+  max-width: 100%;
+
+  overflow-wrap: anywhere;
 
   color: var(--gold-light);
 
@@ -1137,7 +1603,12 @@ textarea {
     "Times New Roman",
     serif;
 
-  font-size: 17px;
+  font-size:
+    clamp(
+      15px,
+      1.6vw,
+      17px
+    );
 
   font-weight: 600;
 
@@ -1149,32 +1620,58 @@ textarea {
 
   z-index: 1;
 
+  max-width: 100%;
+
   color: var(--text-muted);
 
-  font-size: 13px;
+  font-size:
+    clamp(
+      12px,
+      1.25vw,
+      13px
+    );
 
   line-height: 1.4;
 }
+
 
 /* =========================================================
    VIDEOS
    ========================================================= */
 
 .mad-matt-videos {
-  margin-bottom: 110px;
+  margin-bottom:
+    clamp(
+      76px,
+      9vw,
+      110px
+    );
 }
 
 .mad-matt-video-grid {
   display: grid;
 
   grid-template-columns:
-    repeat(2, minmax(0, 1fr));
+    repeat(
+      2,
+      minmax(
+        0,
+        1fr
+      )
+    );
 
-  gap: 25px;
+  gap:
+    clamp(
+      14px,
+      2.5vw,
+      25px
+    );
 }
 
 .mad-matt-video {
   position: relative;
+
+  min-width: 0;
 
   width: 100%;
 
@@ -1185,21 +1682,47 @@ textarea {
   background: #01070b;
 
   border:
-    1px solid rgba(200, 164, 93, 0.38);
+    1px solid
+    rgba(
+      200,
+      164,
+      93,
+      0.38
+    );
 
   box-shadow:
-    0 17px 50px rgba(0, 0, 0, 0.3);
+    0 17px 50px
+    rgba(
+      0,
+      0,
+      0,
+      0.3
+    );
 
   transition:
-    transform 250ms ease,
-    border-color 250ms ease;
+    transform
+    250ms
+    ease,
+    border-color
+    250ms
+    ease;
 }
 
-.mad-matt-video:hover {
-  transform: translateY(-4px);
+@media (hover: hover) and (pointer: fine) {
 
-  border-color:
-    rgba(225, 193, 122, 0.65);
+  .mad-matt-video:hover {
+    transform:
+      translateY(-4px);
+
+    border-color:
+      rgba(
+        225,
+        193,
+        122,
+        0.65
+      );
+  }
+
 }
 
 .mad-matt-video iframe {
@@ -1207,26 +1730,33 @@ textarea {
 
   inset: 0;
 
+  display: block;
+
   width: 100%;
   height: 100%;
+
+  max-width: none;
 
   border: 0;
 }
 
 .mad-matt-video-wide {
-  grid-column: 1 / -1;
+  grid-column:
+    1 / -1;
 }
 
-.mad-matt-video-wide iframe {
-  width: 100%;
-}
 
 /* =========================================================
-   MAD MATT SHIRTS
+   SHIRTS
    ========================================================= */
 
 .mad-matt-shirts {
-  margin-bottom: 110px;
+  margin-bottom:
+    clamp(
+      76px,
+      9vw,
+      110px
+    );
 }
 
 .mad-matt-shirts-inner {
@@ -1234,23 +1764,55 @@ textarea {
 
   overflow: hidden;
 
-  padding: 78px 35px;
+  padding:
+    clamp(
+      48px,
+      7vw,
+      78px
+    )
+    clamp(
+      18px,
+      4vw,
+      35px
+    );
 
   text-align: center;
 
   border-top:
-    1px solid rgba(200, 164, 93, 0.38);
+    1px solid
+    rgba(
+      200,
+      164,
+      93,
+      0.38
+    );
 
   border-bottom:
-    1px solid rgba(200, 164, 93, 0.38);
+    1px solid
+    rgba(
+      200,
+      164,
+      93,
+      0.38
+    );
 
   background:
     radial-gradient(
       circle at center,
-      rgba(200, 164, 93, 0.08),
+      rgba(
+        200,
+        164,
+        93,
+        0.08
+      ),
       transparent 55%
     ),
-    rgba(2, 12, 18, 0.18);
+    rgba(
+      2,
+      12,
+      18,
+      0.18
+    );
 }
 
 .mad-matt-shirts-inner::before,
@@ -1261,7 +1823,12 @@ textarea {
 
   top: 50%;
 
-  width: 110px;
+  width:
+    min(
+      9vw,
+      110px
+    );
+
   height: 1px;
 
   pointer-events: none;
@@ -1270,7 +1837,12 @@ textarea {
     linear-gradient(
       90deg,
       transparent,
-      rgba(200, 164, 93, 0.22)
+      rgba(
+        200,
+        164,
+        93,
+        0.22
+      )
     );
 }
 
@@ -1281,24 +1853,40 @@ textarea {
 .mad-matt-shirts-inner::after {
   right: 3%;
 
-  transform: scaleX(-1);
+  transform:
+    scaleX(-1);
 }
 
 .mad-matt-shirts-kicker {
-  margin: 0 0 17px;
+  margin:
+    0
+    0
+    15px;
 
   color: var(--gold);
 
-  font-size: 11px;
+  font-size:
+    clamp(
+      9px,
+      1.5vw,
+      11px
+    );
 
   font-weight: 700;
 
-  letter-spacing: 0.27em;
+  line-height: 1.4;
+
+  letter-spacing:
+    clamp(
+      0.13em,
+      0.35vw,
+      0.27em
+    );
 
   text-transform: uppercase;
 }
 
-.mad-matt-shirts h4 {
+.mad-matt-shirts h3 {
   margin: 0;
 
   color: var(--gold-light);
@@ -1309,15 +1897,22 @@ textarea {
     serif;
 
   font-size:
-    clamp(34px, 5vw, 58px);
+    clamp(
+      30px,
+      5vw,
+      58px
+    );
 
   font-weight: 600;
 
-  line-height: 1.05;
+  line-height: 1.06;
 }
 
 .mad-matt-shirts-punchline {
-  margin: 10px 0 0;
+  margin:
+    10px
+    0
+    0;
 
   color: #e5ecee;
 
@@ -1327,7 +1922,11 @@ textarea {
     serif;
 
   font-size:
-    clamp(28px, 4vw, 46px);
+    clamp(
+      25px,
+      4vw,
+      46px
+    );
 
   line-height: 1.1;
 
@@ -1337,14 +1936,23 @@ textarea {
 .mad-matt-shirts-copy {
   max-width: 580px;
 
-  margin: 25px auto 0;
+  margin:
+    23px
+    auto
+    0;
 
   color: var(--text-soft);
 
-  font-size: 16px;
+  font-size:
+    clamp(
+      14px,
+      1.6vw,
+      16px
+    );
 
   line-height: 1.7;
 }
+
 
 /* =========================================================
    CONTACT
@@ -1355,23 +1963,56 @@ textarea {
 
   overflow: hidden;
 
-  padding: 80px 30px;
+  padding:
+    clamp(
+      52px,
+      7vw,
+      80px
+    )
+    clamp(
+      14px,
+      3vw,
+      30px
+    );
 
   text-align: center;
 
   border:
-    1px solid rgba(200, 164, 93, 0.42);
+    1px solid
+    rgba(
+      200,
+      164,
+      93,
+      0.42
+    );
 
   background:
     radial-gradient(
       ellipse at 50% 0%,
-      rgba(200, 164, 93, 0.08),
+      rgba(
+        200,
+        164,
+        93,
+        0.08
+      ),
       transparent 55%
     ),
-    rgba(1, 10, 16, 0.28);
+    rgba(
+      1,
+      10,
+      16,
+      0.28
+    );
 
   box-shadow:
-    inset 0 0 80px rgba(0, 0, 0, 0.14);
+    inset
+    0 0 80px
+    rgba(
+      0,
+      0,
+      0,
+      0.14
+    );
 }
 
 .mad-matt-contact::before,
@@ -1384,7 +2025,13 @@ textarea {
   height: 280px;
 
   border:
-    1px solid rgba(200, 164, 93, 0.07);
+    1px solid
+    rgba(
+      200,
+      164,
+      93,
+      0.07
+    );
 
   border-radius: 50%;
 
@@ -1401,7 +2048,6 @@ textarea {
   bottom: -130px;
 }
 
-.mad-matt-contact-icon,
 .mad-matt-contact-mark {
   position: relative;
 
@@ -1411,14 +2057,17 @@ textarea {
 
   color: var(--gold);
 
-  font-size: 29px;
-}
-
-.mad-matt-contact-mark {
   font-family:
     "Pirata One",
     Georgia,
     serif;
+
+  font-size:
+    clamp(
+      24px,
+      3vw,
+      29px
+    );
 
   letter-spacing: 0.12em;
 }
@@ -1428,15 +2077,30 @@ textarea {
 
   z-index: 1;
 
-  margin: 0 0 14px;
+  margin:
+    0
+    0
+    14px;
 
   color: #8da3aa;
 
-  font-size: 11px;
+  font-size:
+    clamp(
+      9px,
+      1.4vw,
+      11px
+    );
 
   font-weight: 700;
 
-  letter-spacing: 0.23em;
+  line-height: 1.4;
+
+  letter-spacing:
+    clamp(
+      0.12em,
+      0.3vw,
+      0.23em
+    );
 
   text-transform: uppercase;
 }
@@ -1448,6 +2112,8 @@ textarea {
 
   display: inline-block;
 
+  max-width: 100%;
+
   color: var(--gold-light);
 
   font-family:
@@ -1456,13 +2122,19 @@ textarea {
     serif;
 
   font-size:
-    clamp(40px, 7vw, 72px);
+    clamp(
+      32px,
+      7vw,
+      72px
+    );
 
   font-weight: 700;
 
   line-height: 1;
 
-  letter-spacing: -0.025em;
+  letter-spacing: -0.03em;
+
+  white-space: nowrap;
 
   border: 0 !important;
   border-bottom: 0 !important;
@@ -1476,12 +2148,21 @@ textarea {
   box-shadow: none;
 
   text-shadow:
-    0 8px 24px rgba(0, 0, 0, 0.3);
+    0 8px 24px
+    rgba(
+      0,
+      0,
+      0,
+      0.3
+    );
 
   transition:
-    color 180ms ease,
-    transform 180ms ease,
-    text-shadow 180ms ease;
+    color
+    180ms
+    ease,
+    text-shadow
+    180ms
+    ease;
 }
 
 .mad-matt-contact a:visited,
@@ -1498,16 +2179,29 @@ textarea {
   box-shadow: none;
 }
 
-.mad-matt-contact a:hover,
-.mad-matt-contact a:focus {
-  color: var(--gold-bright);
+@media (hover: hover) and (pointer: fine) {
 
-  transform:
-    translateY(-2px);
+  .mad-matt-contact a:hover,
+  .mad-matt-contact a:focus {
+    color: var(--gold-bright);
 
-  text-shadow:
-    0 0 25px rgba(224, 193, 122, 0.16),
-    0 8px 24px rgba(0, 0, 0, 0.3);
+    text-shadow:
+      0 0 25px
+      rgba(
+        224,
+        193,
+        122,
+        0.16
+      ),
+      0 8px 24px
+      rgba(
+        0,
+        0,
+        0,
+        0.3
+      );
+  }
+
 }
 
 .mad-matt-contact-name {
@@ -1515,15 +2209,30 @@ textarea {
 
   z-index: 1;
 
-  margin: 20px 0 0;
+  margin:
+    20px
+    0
+    0;
 
   color: #dde5e7;
 
-  font-size: 14px;
+  font-size:
+    clamp(
+      11px,
+      1.5vw,
+      14px
+    );
 
   font-weight: 700;
 
-  letter-spacing: 0.21em;
+  line-height: 1.4;
+
+  letter-spacing:
+    clamp(
+      0.12em,
+      0.35vw,
+      0.21em
+    );
 }
 
 .mad-matt-contact-location {
@@ -1531,16 +2240,314 @@ textarea {
 
   z-index: 1;
 
-  margin: 8px 0 0;
+  max-width: 100%;
+
+  margin:
+    8px
+    auto
+    0;
 
   color: #718991;
 
-  font-size: 11px;
+  font-size:
+    clamp(
+      9px,
+      1.3vw,
+      11px
+    );
 
-  letter-spacing: 0.16em;
+  line-height: 1.5;
+
+  letter-spacing:
+    clamp(
+      0.08em,
+      0.3vw,
+      0.16em
+    );
 
   text-transform: uppercase;
 }
+
+
+/* =========================================================
+   VISIBLE UNDERWATER FLOATING TEXT
+   ========================================================= */
+
+/*
+   Approximately 5px of motion over 7–8 seconds.
+   Different directions and timing keep the page feeling
+   suspended in water instead of moving as one solid block.
+*/
+
+@keyframes madMattFloatUp {
+  0%,
+  100% {
+    transform:
+      translateY(0);
+  }
+
+  50% {
+    transform:
+      translateY(-5px);
+  }
+}
+
+@keyframes madMattFloatDown {
+  0%,
+  100% {
+    transform:
+      translateY(0);
+  }
+
+  50% {
+    transform:
+      translateY(5px);
+  }
+}
+
+@keyframes madMattFloatSoft {
+  0%,
+  100% {
+    transform:
+      translateY(-1px);
+  }
+
+  50% {
+    transform:
+      translateY(4px);
+  }
+}
+
+
+/* =========================================================
+   WATERLINE BRAND FLOAT
+   ========================================================= */
+
+.mad-matt-brand-eyebrow {
+  animation:
+    madMattFloatUp
+    6.8s
+    ease-in-out
+    infinite;
+}
+
+.mad-matt-waterline-brand h1 {
+  animation:
+    madMattFloatDown
+    7.6s
+    ease-in-out
+    infinite
+    -2.1s;
+}
+
+.mad-matt-brand-subtitle {
+  animation:
+    madMattFloatSoft
+    7.1s
+    ease-in-out
+    infinite
+    -4s;
+}
+
+
+/* =========================================================
+   INTRO FLOAT
+   ========================================================= */
+
+.mad-matt-divider {
+  animation:
+    madMattFloatUp
+    8s
+    ease-in-out
+    infinite
+    -3s;
+}
+
+.mad-matt-intro-copy .mad-matt-lead {
+  animation:
+    madMattFloatDown
+    7.4s
+    ease-in-out
+    infinite
+    -1.5s;
+}
+
+.mad-matt-intro-copy > p:not(.mad-matt-lead) {
+  animation:
+    madMattFloatSoft
+    8.4s
+    ease-in-out
+    infinite
+    -5s;
+}
+
+
+/* =========================================================
+   SECTION HEADING FLOAT
+   ========================================================= */
+
+.mad-matt-section-title h2 {
+  animation:
+    madMattFloatUp
+    7.2s
+    ease-in-out
+    infinite
+    -2.8s;
+}
+
+
+/* =========================================================
+   SERVICES FLOAT
+   ========================================================= */
+
+.mad-matt-service:nth-child(odd)
+.mad-matt-service-icon {
+  animation:
+    madMattFloatDown
+    7s
+    ease-in-out
+    infinite
+    -1s;
+}
+
+.mad-matt-service:nth-child(even)
+.mad-matt-service-icon {
+  animation:
+    madMattFloatSoft
+    7.8s
+    ease-in-out
+    infinite
+    -4.5s;
+}
+
+.mad-matt-service:nth-child(odd)
+strong {
+  animation:
+    madMattFloatUp
+    6.9s
+    ease-in-out
+    infinite;
+}
+
+.mad-matt-service:nth-child(even)
+strong {
+  animation:
+    madMattFloatDown
+    7.5s
+    ease-in-out
+    infinite
+    -3s;
+}
+
+.mad-matt-service:nth-child(odd)
+small {
+  animation:
+    madMattFloatSoft
+    8s
+    ease-in-out
+    infinite
+    -4s;
+}
+
+.mad-matt-service:nth-child(even)
+small {
+  animation:
+    madMattFloatUp
+    8.3s
+    ease-in-out
+    infinite
+    -2s;
+}
+
+
+/* =========================================================
+   SHIRTS FLOAT
+   ========================================================= */
+
+.mad-matt-shirts-kicker {
+  animation:
+    madMattFloatSoft
+    7.3s
+    ease-in-out
+    infinite;
+}
+
+.mad-matt-shirts h3 {
+  animation:
+    madMattFloatUp
+    7.7s
+    ease-in-out
+    infinite
+    -3s;
+}
+
+.mad-matt-shirts-punchline {
+  animation:
+    madMattFloatDown
+    6.9s
+    ease-in-out
+    infinite
+    -5s;
+}
+
+.mad-matt-shirts-copy {
+  animation:
+    madMattFloatSoft
+    8.1s
+    ease-in-out
+    infinite
+    -2s;
+}
+
+
+/* =========================================================
+   CONTACT FLOAT
+   ========================================================= */
+
+.mad-matt-contact-mark {
+  animation:
+    madMattFloatUp
+    7.2s
+    ease-in-out
+    infinite;
+}
+
+.mad-matt-contact-label {
+  animation:
+    madMattFloatDown
+    7.9s
+    ease-in-out
+    infinite
+    -4s;
+}
+
+.mad-matt-contact a {
+  animation:
+    madMattFloatSoft
+    8.2s
+    ease-in-out
+    infinite
+    -3.5s;
+}
+
+.mad-matt-contact-name {
+  animation:
+    madMattFloatUp
+    7.5s
+    ease-in-out
+    infinite
+    -1.5s;
+}
+
+.mad-matt-contact-location {
+  animation:
+    madMattFloatDown
+    8.4s
+    ease-in-out
+    infinite
+    -5s;
+}
+
 
 /* =========================================================
    FOOTER
@@ -1551,15 +2558,48 @@ footer {
 
   z-index: 10;
 
-  padding: 42px 20px;
+  padding:
+    42px
+    max(
+      20px,
+      env(
+        safe-area-inset-right,
+        0px
+      )
+    )
+    max(
+      42px,
+      env(
+        safe-area-inset-bottom,
+        0px
+      )
+    )
+    max(
+      20px,
+      env(
+        safe-area-inset-left,
+        0px
+      )
+    );
 
   border-top:
-    1px solid rgba(200, 164, 93, 0.13);
+    1px solid
+    rgba(
+      200,
+      164,
+      93,
+      0.13
+    );
 
   background: #02090d;
 
   color:
-    rgba(211, 222, 224, 0.55);
+    rgba(
+      211,
+      222,
+      224,
+      0.55
+    );
 
   text-align: center;
 
@@ -1569,7 +2609,12 @@ footer {
 footer a,
 footer a:visited {
   color:
-    rgba(211, 222, 224, 0.62);
+    rgba(
+      211,
+      222,
+      224,
+      0.62
+    );
 
   border: 0 !important;
 
@@ -1590,7 +2635,10 @@ footer a:focus {
 
   max-width: 220px;
 
-  margin: 0 auto 24px;
+  margin:
+    0
+    auto
+    24px;
 
   align-items: center;
 
@@ -1610,135 +2658,277 @@ footer a:focus {
   fill: currentColor;
 }
 
+
 /* =========================================================
-   TABLET
+   TABLETS / SMALL LAPTOPS
    ========================================================= */
 
-@media (max-width: 900px) {
+@media (max-width: 960px) {
 
   .mad-matt-service-grid {
     grid-template-columns:
-      repeat(2, minmax(0, 1fr));
+      repeat(
+        2,
+        minmax(
+          0,
+          1fr
+        )
+      );
   }
 
 }
 
+
 /* =========================================================
-   MOBILE
+   PHONES / SMALL TABLETS
    ========================================================= */
 
-@media (max-width: 650px) {
+@media (max-width: 760px) {
+
+  :root {
+    --page-gutter:
+      clamp(
+        12px,
+        4vw,
+        24px
+      );
+  }
 
   .pirate-screen {
-    min-height: 520px;
+    min-height: 500px;
   }
 
   .pirate-r {
     font-size:
-      min(100vw, 78vh);
+      min(
+        100vw,
+        78vh
+      );
   }
 
   .pirate-compass {
     width:
-      min(86vw, 430px);
+      min(
+        84vmin,
+        470px
+      );
   }
 
   .mad-matt-sea-surface {
-    height: 96px;
+    height: 98px;
 
     transform:
-      translateY(-34px);
+      translateY(-36px);
+  }
+
+  .mad-matt-sea-surface::after {
+    top: 27px;
+  }
+
+  .mad-matt-waterline-brand {
+    transform:
+      translateY(-50%);
   }
 
   .mad-matt-old-site {
     width:
-      calc(100% - 24px);
+      calc(
+        100% -
+        24px
+      );
 
-    padding:
-      95px 0 75px;
-  }
-
-  .mad-matt-intro {
-    margin-bottom: 55px;
-  }
-
-  .mad-matt-intro h1 {
-    font-size:
-      clamp(40px, 13vw, 62px);
-  }
-
-  .mad-matt-intro h2 {
-    font-size: 13px;
-
-    letter-spacing: 0.14em;
-  }
-
-  .mad-matt-intro p {
-    font-size: 16px;
-  }
-
-  .mad-matt-hero-image {
-    margin-bottom: 75px;
-  }
-
-  .mad-matt-service-grid {
-    grid-template-columns:
-      repeat(2, minmax(0, 1fr));
-  }
-
-  .mad-matt-service {
-    min-height: 150px;
-
-    padding: 22px 12px;
+    padding-top:
+      clamp(
+        105px,
+        24vw,
+        145px
+      );
   }
 
   .mad-matt-video-grid {
     grid-template-columns: 1fr;
   }
 
-  .mad-matt-services,
-  .mad-matt-videos,
-  .mad-matt-shirts {
-    margin-bottom: 80px;
+  .mad-matt-video-wide {
+    grid-column: auto;
   }
 
-  .mad-matt-shirts-inner {
-    padding: 58px 22px;
-  }
-
-  .mad-matt-section-title {
-    gap: 10px;
-  }
-
-  .mad-matt-section-title h3 {
-    font-size: 10px;
-
-    letter-spacing: 0.14em;
-
-    white-space: normal;
-  }
-
-  .mad-matt-contact {
-    padding: 58px 14px;
+  .mad-matt-shirts-inner::before,
+  .mad-matt-shirts-inner::after {
+    display: none;
   }
 
 }
 
+
 /* =========================================================
-   SMALL MOBILE
+   COMMON PHONE WIDTHS
+   360 / 375 / 390 / 412 / 430
    ========================================================= */
 
-@media (max-width: 420px) {
+@media (max-width: 520px) {
+
+  .pirate-screen {
+    min-height: 470px;
+  }
+
+  .mad-matt-waterline-brand h1 {
+    font-size:
+      clamp(
+        1.65rem,
+        8vw,
+        2.7rem
+      );
+  }
+
+  .mad-matt-brand-eyebrow {
+    letter-spacing: 0.12em;
+  }
+
+  .mad-matt-brand-subtitle {
+    letter-spacing: 0.1em;
+  }
+
+  .mad-matt-old-site {
+    padding-top:
+      clamp(
+        100px,
+        27vw,
+        130px
+      );
+  }
+
+  .mad-matt-section-title h2 {
+    max-width: 78%;
+  }
+
+  .mad-matt-contact a {
+    font-size:
+      clamp(
+        30px,
+        9.5vw,
+        44px
+      );
+  }
+
+}
+
+
+/* =========================================================
+   VERY NARROW PHONES
+   320 / 340 RANGE
+   ========================================================= */
+
+@media (max-width: 350px) {
+
+  .pirate-screen {
+    min-height: 450px;
+  }
+
+  .mad-matt-waterline-brand h1 {
+    font-size: 1.58rem;
+  }
+
+  .mad-matt-brand-eyebrow {
+    font-size: 7.5px;
+
+    letter-spacing: 0.09em;
+  }
+
+  .mad-matt-brand-subtitle {
+    font-size: 9.5px;
+
+    letter-spacing: 0.08em;
+  }
 
   .mad-matt-service-grid {
     grid-template-columns: 1fr;
   }
 
   .mad-matt-service {
-    min-height: 130px;
+    min-height: 126px;
+  }
+
+  .mad-matt-contact a {
+    font-size: 29px;
   }
 
 }
+
+
+/* =========================================================
+   SHORT LANDSCAPE PHONES
+   ========================================================= */
+
+@media
+  (orientation: landscape)
+  and
+  (max-height: 560px) {
+
+  .pirate-screen {
+    height: 100svh;
+
+    min-height: 340px;
+  }
+
+  .pirate-r {
+    font-size:
+      min(
+        62vw,
+        80vh
+      );
+  }
+
+  .pirate-compass {
+    top: 48%;
+
+    width:
+      min(
+        70vmin,
+        390px
+      );
+  }
+
+  .mad-matt-waterline-brand h1 {
+    font-size:
+      clamp(
+        2rem,
+        6vw,
+        3.5rem
+      );
+  }
+
+  .mad-matt-brand-eyebrow {
+    font-size: 8px;
+  }
+
+  .mad-matt-brand-subtitle {
+    font-size: 10px;
+  }
+
+  .mad-matt-old-site {
+    padding-top: 110px;
+  }
+
+}
+
+
+/* =========================================================
+   LARGE / ULTRAWIDE DESKTOP
+   ========================================================= */
+
+@media (min-width: 1600px) {
+
+  .mad-matt-waterline-brand h1 {
+    font-size: 5.25rem;
+  }
+
+  .mad-matt-old-site {
+    padding-top: 190px;
+  }
+
+}
+
 
 /* =========================================================
    REDUCED MOTION
@@ -1749,7 +2939,25 @@ footer a:focus {
   .pirate-compass::after,
   .mad-matt-surface-wave,
   .mad-matt-surface-wave-two,
-  .mad-matt-surface-foam {
+  .mad-matt-surface-foam,
+  .mad-matt-brand-eyebrow,
+  .mad-matt-waterline-brand h1,
+  .mad-matt-brand-subtitle,
+  .mad-matt-divider,
+  .mad-matt-intro-copy p,
+  .mad-matt-section-title h2,
+  .mad-matt-service-icon,
+  .mad-matt-service strong,
+  .mad-matt-service small,
+  .mad-matt-shirts-kicker,
+  .mad-matt-shirts h3,
+  .mad-matt-shirts-punchline,
+  .mad-matt-shirts-copy,
+  .mad-matt-contact-mark,
+  .mad-matt-contact-label,
+  .mad-matt-contact a,
+  .mad-matt-contact-name,
+  .mad-matt-contact-location {
     animation: none !important;
   }
 
